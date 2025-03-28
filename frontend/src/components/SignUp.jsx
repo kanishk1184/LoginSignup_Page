@@ -21,7 +21,7 @@ const SignUp = () => {
   }, []);
 
   const onSubmit =async (data) => {
-    const info = await fetch("https://loginsignup-page.onrender.com:3000/signup", {
+    const info = await fetch("https://loginsignup-page.onrender.com/signup", {
       method: "POST",
       headers: {
         'content-type': 'application/json',

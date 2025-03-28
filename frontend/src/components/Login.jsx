@@ -23,7 +23,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
 
-    const info = await fetch("https://loginsignup-page.onrender.com:3000/login", {
+    const info = await fetch("https://loginsignup-page.onrender.com/login", {
       method: "POST",
       headers: {
         'content-type': 'application/json',
