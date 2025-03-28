@@ -11,7 +11,20 @@ const app = express()
 const port = 3000
 app.use(cors());
 app.use(express.json());
-await mongoose.connect(connString);
+
+const startServer = async () => {
+    try {
+        await mongoose.connect(connString);
+        console.log("Connected to MongoDB");
+
+        app.listen(port, () => {
+            console.log(`Listening on port ${port}`);
+        });
+    } catch (error) {
+        console.error("DB Connection failed:", error);
+    }
+};
+
 
 
 async function handleLogin(req, res){
@@ -51,7 +64,7 @@ async function handleSignUp(req, res){
                 password: currPass,
                 email: currEmail,
             })
-            newUser.save();
+            await newUser.save();
             res.json({code: 100, name: currName});
         }
     }
@@ -59,15 +72,13 @@ async function handleSignUp(req, res){
 
 
 
-app.post('/login', (req, res) => {
+app.post('/login',async (req, res) => {
     console.log("REQ AAG");
-    handleLogin(req, res);
+    await handleLogin(req, res);
 })
-app.post('/signup', (req, res) => {
+app.post('/signup',async (req, res) => {
     console.log("REQ AAGYI");
-    handleSignUp(req, res);
+    await handleSignUp(req, res);
 })
 
-app.listen(port, () => {
-  console.log(`Listening...`)
-})
+startServer();
