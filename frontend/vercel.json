@@ -4,6 +4,10 @@
         "source": "/(.*)",
         "destination": "/index.html"
       }
+    ],
+    "routes": [
+        {
+            "src": "/welcome/(.*)", "dest": "/index.html"
+        }
     ]
   }
-  
